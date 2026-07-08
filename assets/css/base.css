@@ -1,0 +1,80 @@
+:root {
+    --color-bg: #f4f6f7;
+    --color-surface: #ffffff;
+    --color-primary: #2c3e50;
+    --color-accent: #e74c3c;
+    --color-muted: #7f8c8d;
+    --color-text: #333333;
+    --color-border: #e0e0e0;
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --font-ui: "Helvetica Neue", Arial, sans-serif;
+}
+
+html,
+body {
+    background-color: var(--color-bg);
+    font-family: var(--font-ui);
+    overflow-x: hidden;
+}
+
+html,
+body,
+#map {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+.ol-control > * {
+    background-color: #f8f8f8 !important;
+    color: #444444 !important;
+    border-radius: 0;
+}
+
+.ol-layerswitcher,
+.layer-switcher {
+    display: none !important;
+}
+
+.ol-zoom {
+    top: 15px;
+    left: 15px;
+}
+
+.ol-zoom button {
+    width: 32px;
+    height: 32px;
+    margin: 2px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--color-primary) !important;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.ol-scale-line {
+    position: absolute;
+    bottom: 25px !important;
+    left: 15px !important;
+    padding: 0 !important;
+    background: none !important;
+}
+
+.ol-scale-line-inner {
+    padding-bottom: 2px;
+    border: 1.5px solid var(--color-primary) !important;
+    border-top: none !important;
+    background: rgba(255, 255, 255, 0.4);
+    color: var(--color-primary) !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    text-shadow: 1px 1px 2px #ffffff, -1px -1px 2px #ffffff, 1px -1px 2px #ffffff, -1px 1px 2px #ffffff;
+}
