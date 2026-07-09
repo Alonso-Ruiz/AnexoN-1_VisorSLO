@@ -1,4 +1,7 @@
 import { defineConfig } from "vite";
+import { cpSync, existsSync, rmSync } from "node:fs";
+import { resolve } from "node:path";
+import { cwd } from "node:process";
 
 const securityHeaders = {
   "Content-Security-Policy": [
@@ -19,8 +22,30 @@ const securityHeaders = {
   "Permissions-Policy": "geolocation=(), camera=(), microphone=()"
 };
 
+function copyLegacyStaticAssets() {
+  return {
+    name: "copy-legacy-static-assets",
+    closeBundle() {
+      const staticDirs = ["data", "vendor/resources"];
+
+      staticDirs.forEach((dir) => {
+        const source = resolve(cwd(), dir);
+        const target = resolve(cwd(), "dist", dir);
+
+        if (!existsSync(source)) {
+          return;
+        }
+
+        rmSync(target, { recursive: true, force: true });
+        cpSync(source, target, { recursive: true });
+      });
+    }
+  };
+}
+
 export default defineConfig({
   base: "./",
+  plugins: [copyLegacyStaticAssets()],
   build: {
     sourcemap: true
   },
