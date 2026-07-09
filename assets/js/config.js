@@ -9,7 +9,7 @@
         layers: {
             satellite: {
                 title: "Google Satellite",
-                attribution: "© Google",
+                attribution: "\u00a9 Google",
                 zIndex: -999,
                 opacity: 1
             },
@@ -31,9 +31,9 @@
         },
         text: {
             panelOpen: "CERRAR",
-            panelClosed: "◀ BASE LEGAL Y NOTAS",
-            legendOpenIcon: "▼",
-            legendClosedIcon: "▲"
+            panelClosed: "\u25c0 BASE LEGAL Y NOTAS",
+            legendOpenIcon: "\u25bc",
+            legendClosedIcon: "\u25b2"
         }
     };
 })(window);

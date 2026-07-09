@@ -78,16 +78,57 @@
 
 .institutional-title {
     position: absolute;
-    top: 15px;
-    left: 65px;
-    z-index: 1000;
-    max-width: 35%;
-    padding: 12px 18px;
+    top: 20px;
+    left: 72px;
+    z-index: 1010;
+    width: 460px;
+    max-width: calc(100vw - 150px);
+    padding: 14px 18px;
+    box-sizing: border-box;
     border-left: 5px solid var(--color-primary);
-    border-radius: 4px;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 1.2s ease, transform 1.2s ease, visibility 1.2s ease;
+    visibility: hidden;
+}
+
+.institutional-title.is-visible {
+    opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.institutional-info-button {
+    position: absolute;
+    top: 120px;
+    left: 25px;
+    z-index: 1001;
+    display: flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(44, 62, 80, 0.14);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1;
+}
+
+.institutional-info-button:hover,
+.institutional-info-button:focus-visible {
+    background: var(--color-primary);
+    color: #ffffff;
 }
 
 .institutional-title h1 {
@@ -112,7 +153,8 @@
     left: 50%;
     z-index: 1000;
     display: flex;
-    width: 320px;
+    width: min(520px, calc(100vw - 760px));
+    min-width: 320px;
     padding: 8px 15px;
     align-items: center;
     justify-content: flex-start;
@@ -124,10 +166,11 @@
     transition: all 0.3s ease;
 }
 
-.search-container i {
+.search-icon {
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
     color: var(--color-muted);
-    font-size: 14px;
 }
 
 .search-container input {
@@ -218,9 +261,10 @@
     right: 15px;
     bottom: 25px;
     z-index: 990;
-    width: 250px;
+    width: 320px;
+    max-width: calc(100vw - 30px);
     overflow: hidden;
-    border: 1px solid var(--color-border);
+    border: 1px solid rgba(224, 224, 224, 0.9);
     border-radius: 6px;
     background: var(--color-surface);
     box-shadow: var(--shadow-soft);
@@ -229,20 +273,39 @@
 
 .legend-header {
     display: flex;
-    padding: 12px 15px;
+    width: 100%;
+    min-height: 52px;
+    padding: 0 18px;
     align-items: center;
     justify-content: space-between;
+    box-sizing: border-box;
+    border: 0;
     border-bottom: 1px solid #eaeaea;
-    background: var(--color-bg);
+    background: rgba(255, 255, 255, 0.96);
     color: var(--color-primary);
     cursor: pointer;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: bold;
+    text-align: left;
+}
+
+.legend-header:focus {
+    outline: none;
+}
+
+.legend-header:focus-visible {
+    outline: 2px solid rgba(44, 62, 80, 0.35);
+    outline-offset: -2px;
+}
+
+#legend-icon {
+    flex-shrink: 0;
+    margin-left: 16px;
 }
 
 .legend-content {
     display: block;
-    padding: 15px;
+    padding: 12px 14px 14px;
 }
 
 .layer-toggle {
@@ -317,6 +380,11 @@ input[type="range"] {
 
 .legend-icon-mobile {
     display: none;
+}
+
+.legend-layer-icon {
+    width: 22px;
+    height: 22px;
 }
 
 .info-panel {

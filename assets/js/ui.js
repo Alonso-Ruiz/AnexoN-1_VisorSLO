@@ -40,6 +40,36 @@
         }
     }
 
+    function bindInstitutionalInfo() {
+        var panel = document.getElementById("institutional-title");
+        var button = document.getElementById("institutional-info-button");
+        var hideTimer;
+
+        if (!panel || !button) {
+            return;
+        }
+
+        if (button.dataset.boundInstitutionalInfo === "true") {
+            return;
+        }
+
+        button.dataset.boundInstitutionalInfo = "true";
+
+        function showPanel() {
+            window.clearTimeout(hideTimer);
+            panel.classList.add("is-visible");
+            button.setAttribute("aria-expanded", "true");
+
+            hideTimer = window.setTimeout(function () {
+                panel.classList.remove("is-visible");
+                button.setAttribute("aria-expanded", "false");
+            }, 5200);
+        }
+
+        button.addEventListener("click", showPanel);
+        showPanel();
+    }
+
     function bindPanelToggle() {
         var panel = document.getElementById("info-panel");
         var button = document.getElementById("info-panel-toggle");
@@ -98,6 +128,7 @@
     }
 
     function initUiControls(map) {
+        bindInstitutionalInfo();
         bindDeclarativeActions();
         bindPanelToggle();
         bindContextMenuGuard();
@@ -107,6 +138,7 @@
     window.closeWelcomeModal = closeWelcomeModal;
     window.resetNorth = resetNorth;
     window.toggleLegend = toggleLegend;
+    window.bindInstitutionalInfo = bindInstitutionalInfo;
     window.VisorUi = {
         init: initUiControls
     };

@@ -1,6 +1,10 @@
 (function (window) {
     "use strict";
 
+    if (window.bindInstitutionalInfo) {
+        window.bindInstitutionalInfo();
+    }
+
     function boot() {
         if (!window.map) {
             window.setTimeout(boot, 100);
