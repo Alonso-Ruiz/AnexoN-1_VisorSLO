@@ -26,7 +26,7 @@ function copyLegacyStaticAssets() {
   return {
     name: "copy-legacy-static-assets",
     closeBundle() {
-      const staticDirs = ["data", "vendor/resources"];
+      const staticDirs = ["assets/js", "data", "vendor/resources"];
 
       staticDirs.forEach((dir) => {
         const source = resolve(cwd(), dir);
