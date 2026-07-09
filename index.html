@@ -1,76 +1,140 @@
 <!doctype html>
 <html lang="es">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="icon" type="image/png" href="./assets/img/Escudo_de_San_Borja.png">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+        <meta
+            name="description"
+            content="Visor interactivo de la Restricci&oacute;n Aeron&aacute;utica derivada de las Superficies Limitadoras de Obst&aacute;culos del Aer&oacute;dromo Las Palmas."
+        />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="icon" type="image/png" href="./assets/img/favicon-san-borja.png" />
 
         <title>Restricci&oacute;n Aeron&aacute;utica - Las Palmas</title>
     </head>
     <body>
         <div id="welcome-modal-overlay" class="welcome-overlay">
             <div id="welcome-modal" class="welcome-modal">
-                <button class="close-btn" type="button" aria-label="Cerrar bienvenida" data-action="close-welcome">x</button>
-                <img class="welcome-logo" src="./assets/img/Escudo_de_San_Borja.png" alt="Escudo de San Borja">
+                <button class="close-btn" type="button" aria-label="Cerrar bienvenida" data-action="close-welcome">
+                    x
+                </button>
+                <img
+                    class="welcome-logo"
+                    src="./assets/img/escudo-san-borja-180.webp"
+                    width="180"
+                    height="202"
+                    alt="Escudo de San Borja"
+                />
                 <h2>DECRETO DE ALCALD&Iacute;A N&deg; 003-2026-MSB-A</h2>
-                <p>Bienvenido al visor interactivo de la Restricci&oacute;n Aeron&aacute;utica derivada de las Superficies Limitadoras de Obst&aacute;culos (SLO) del Aer&oacute;dromo Las Palmas. Este visor es una herramienta de consulta referencial sobre las altitudes m&aacute;ximas permitidas de acuerdo a la normativa vigente.</p>
+                <p>
+                    Bienvenido al visor interactivo de la Restricci&oacute;n Aeron&aacute;utica derivada de las
+                    Superficies Limitadoras de Obst&aacute;culos (SLO) del Aer&oacute;dromo Las Palmas. Este visor es
+                    una herramienta de consulta referencial sobre las altitudes m&aacute;ximas permitidas de acuerdo a
+                    la normativa vigente.
+                </p>
                 <button class="primary-button" type="button" data-action="close-welcome">Ingresar al Visor</button>
             </div>
         </div>
 
-        <button id="institutional-info-button" class="institutional-info-button" type="button" aria-label="Mostrar informaci&oacute;n del decreto" aria-controls="institutional-title" aria-expanded="true">i</button>
+        <button
+            id="institutional-info-button"
+            class="institutional-info-button"
+            type="button"
+            aria-label="Mostrar informaci&oacute;n del decreto"
+            aria-controls="institutional-title"
+            aria-expanded="true"
+        >
+            i
+        </button>
 
         <header id="institutional-title" class="institutional-title is-visible" role="dialog" aria-live="polite">
             <h1>
                 DECRETO DE ALCALD&Iacute;A N&deg; 003-2026-MSB-A
-                <span>Restricci&oacute;n aeron&aacute;utica derivada de las Superficies Limitadoras de Obst&aacute;culos (SLO) del Aer&oacute;dromo Las Palmas</span>
+                <span
+                    >Restricci&oacute;n aeron&aacute;utica derivada de las Superficies Limitadoras de Obst&aacute;culos
+                    (SLO) del Aer&oacute;dromo Las Palmas</span
+                >
             </h1>
         </header>
 
         <div id="search-container" class="search-container">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
-                <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
-            <input type="text" id="street-search" placeholder="Buscar v&iacute;a o avenida..." autocomplete="off">
+            <input
+                type="text"
+                id="street-search"
+                placeholder="Buscar v&iacute;a o avenida..."
+                aria-label="Buscar v&iacute;a o avenida"
+                autocomplete="off"
+            />
             <div id="search-results" class="search-results"></div>
         </div>
 
         <button id="north-arrow" class="north-arrow" type="button" title="Restablecer orientaci&oacute;n al Norte">
             <span id="north-icon" class="north-icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M12 2L6 22L12 17L18 22L12 2Z" fill="#2c3e50" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/>
-                    <path d="M12 2V17L18 22L12 2Z" fill="#e74c3c"/>
+                    <path
+                        d="M12 2L6 22L12 17L18 22L12 2Z"
+                        fill="#2c3e50"
+                        stroke="#ffffff"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                    <path d="M12 2V17L18 22L12 2Z" fill="#e74c3c" />
                 </svg>
                 <span>N</span>
             </span>
         </button>
 
         <aside id="custom-legend" class="custom-legend">
-            <button id="legend-icon-mobile" class="legend-icon-mobile" type="button" aria-label="Mostrar leyenda" data-action="toggle-legend">
+            <button
+                id="legend-icon-mobile"
+                class="legend-icon-mobile"
+                type="button"
+                aria-label="Mostrar leyenda"
+                data-action="toggle-legend"
+            >
                 <svg class="legend-layer-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M12 3L3 8L12 13L21 8L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M3 13L12 18L21 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M3 18L12 23L21 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path
+                        d="M12 3L3 8L12 13L21 8L12 3Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M3 13L12 18L21 13"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M3 18L12 23L21 18"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
                 </svg>
             </button>
             <button class="legend-header" type="button" data-action="toggle-legend">
-                <span>Leyenda y Mapa Base</span>
+                <span>Leyenda</span>
                 <span id="legend-icon">&#9660;</span>
             </button>
             <div class="legend-content" id="legend-content">
                 <label class="layer-toggle">
-                    <input type="checkbox" id="googleMapsToggle" checked>
+                    <input type="checkbox" id="googleMapsToggle" checked />
                     Ver Google Sat&eacute;lite
                 </label>
 
                 <div class="legend-range-label">Transparencia del sat&eacute;lite:</div>
-                <input type="range" min="0" max="1" step="0.01" value="1" id="opacity-slider">
+                <input type="range" min="0" max="1" step="0.01" value="1" id="opacity-slider" />
 
-                <hr class="legend-separator">
+                <hr class="legend-separator" />
 
                 <div class="legend-item">
                     <div class="legend-color selected"></div>
@@ -93,19 +157,43 @@
                 <h3>BASE LEGAL</h3>
                 <ul>
                     <li>Ley N&deg; 27261 - Ley de Aeron&aacute;utica Civil</li>
-                    <li>Decreto Supremo N&deg; 050-2001-MTC - Reglamento de la Ley de Aeron&aacute;utica Civil del Per&uacute;.</li>
-                    <li>Regulaci&oacute;n Aeron&aacute;utica Peruana - RAP 314 AER&Oacute;DROMOS - VOLUMEN I - Dise&ntilde;o y operaciones de aer&oacute;dromos. Referencia: Anexo 14 (OACI) Aer&oacute;dromos.</li>
-                    <li>Manual de Servicios de Aeropuertos (Doc. 9137) Parte 6 - Limitaciones de Obst&aacute;culos de la OACI como documento t&eacute;cnico del Anexo 14.</li>
-                    <li>Resoluci&oacute;n Directoral N&deg;0579-2021-MTC/12 del 18/11/21 - Autorizaci&oacute;n del funcionamiento del Aer&oacute;dromo Privado "Las Palmas".</li>
+                    <li>
+                        Decreto Supremo N&deg; 050-2001-MTC - Reglamento de la Ley de Aeron&aacute;utica Civil del
+                        Per&uacute;.
+                    </li>
+                    <li>
+                        Regulaci&oacute;n Aeron&aacute;utica Peruana - RAP 314 AER&Oacute;DROMOS - VOLUMEN I -
+                        Dise&ntilde;o y operaciones de aer&oacute;dromos. Referencia: Anexo 14 (OACI) Aer&oacute;dromos.
+                    </li>
+                    <li>
+                        Manual de Servicios de Aeropuertos (Doc. 9137) Parte 6 - Limitaciones de Obst&aacute;culos de la
+                        OACI como documento t&eacute;cnico del Anexo 14.
+                    </li>
+                    <li>
+                        Resoluci&oacute;n Directoral N&deg;0579-2021-MTC/12 del 18/11/21 - Autorizaci&oacute;n del
+                        funcionamiento del Aer&oacute;dromo Privado "Las Palmas".
+                    </li>
                 </ul>
             </section>
             <section class="info-section">
                 <h3>NOTA 1</h3>
-                <p>El presente plano no otorga derechos edificatorios ni constituye regulaci&oacute;n urban&iacute;stica de altura. Las altitudes consignadas corresponden exclusivamente a las limitaciones establecidas por la normativa aeron&aacute;utica vigente, en el marco de las Superficies Limitadoras de Obst&aacute;culos (SLO).</p>
+                <p>
+                    El presente plano no otorga derechos edificatorios ni constituye regulaci&oacute;n
+                    urban&iacute;stica de altura. Las altitudes consignadas corresponden exclusivamente a las
+                    limitaciones establecidas por la normativa aeron&aacute;utica vigente, en el marco de las
+                    Superficies Limitadoras de Obst&aacute;culos (SLO).
+                </p>
             </section>
             <section class="info-section">
                 <h3>NOTA 2</h3>
-                <p>En los casos en que un predio se ubique en m&aacute;s de un cuadrante SLO, ser&aacute; de aplicaci&oacute;n la altitud m&aacute;s restrictiva, conforme a la determinaci&oacute;n de la normativa aeron&aacute;utica. Excepcionalmente, podr&aacute; considerarse la altitud correspondiente al cuadrante contiguo cuando la superficie del predio comprendida en dicho cuadrante represente, como m&iacute;nimo, el ochenta por ciento (80 %) del &aacute;rea total, sin perjuicio de las autorizaciones sectoriales que correspondan.</p>
+                <p>
+                    En los casos en que un predio se ubique en m&aacute;s de un cuadrante SLO, ser&aacute; de
+                    aplicaci&oacute;n la altitud m&aacute;s restrictiva, conforme a la determinaci&oacute;n de la
+                    normativa aeron&aacute;utica. Excepcionalmente, podr&aacute; considerarse la altitud correspondiente
+                    al cuadrante contiguo cuando la superficie del predio comprendida en dicho cuadrante represente,
+                    como m&iacute;nimo, el ochenta por ciento (80 %) del &aacute;rea total, sin perjuicio de las
+                    autorizaciones sectoriales que correspondan.
+                </p>
             </section>
         </aside>
 

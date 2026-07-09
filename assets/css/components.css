@@ -6,6 +6,17 @@
     align-items: center;
     justify-content: center;
     background: rgba(80, 44, 44, 0.85);
+    opacity: 1;
+    transition:
+        opacity 0.26s ease,
+        visibility 0.26s ease;
+    visibility: visible;
+}
+
+.welcome-overlay.is-closing {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
 }
 
 .welcome-modal {
@@ -21,9 +32,11 @@
 
 .welcome-logo {
     display: block;
-    width: auto;
+    width: 96px;
+    max-width: 32vw;
     height: 110px;
     margin: 0 auto 15px;
+    object-fit: contain;
 }
 
 .close-btn {
@@ -78,7 +91,7 @@
 
 .institutional-title {
     position: absolute;
-    top: 20px;
+    top: 70px;
     left: 72px;
     z-index: 1010;
     width: 460px;
@@ -92,7 +105,10 @@
     opacity: 0;
     pointer-events: none;
     transform: translateY(-8px);
-    transition: opacity 1.2s ease, transform 1.2s ease, visibility 1.2s ease;
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease,
+        visibility 1.2s ease;
     visibility: hidden;
 }
 
@@ -153,7 +169,7 @@
     left: 50%;
     z-index: 1000;
     display: flex;
-    width: min(520px, calc(100vw - 760px));
+    width: min(520px, calc(100vw - 180px));
     min-width: 320px;
     padding: 8px 15px;
     align-items: center;

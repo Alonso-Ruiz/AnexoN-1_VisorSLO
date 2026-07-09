@@ -8,7 +8,7 @@
     }
 
     .institutional-title {
-        top: 12px;
+        top: 65px;
         right: 58px;
         left: 12px;
         width: auto;
@@ -132,8 +132,9 @@
 
     .search-container {
         top: 16px;
-        left: 58%;
-        width: min(520px, calc(100vw - 155px));
+        left: 50%;
+        width: min(560px, calc(100vw - 220px));
         min-width: 0;
+        transform: translateX(-50%);
     }
 }
