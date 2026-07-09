@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
             name="description"
             content="Visor interactivo de la Restricci&oacute;n Aeron&aacute;utica derivada de las Superficies Limitadoras de Obst&aacute;culos del Aer&oacute;dromo Las Palmas."
@@ -49,8 +49,14 @@
             i
         </button>
 
-        <header id="institutional-title" class="institutional-title is-visible" role="dialog" aria-live="polite">
-            <h1>
+        <header
+            id="institutional-title"
+            class="institutional-title is-visible"
+            role="dialog"
+            aria-labelledby="institutional-heading"
+            aria-live="polite"
+        >
+            <h1 id="institutional-heading">
                 DECRETO DE ALCALD&Iacute;A N&deg; 003-2026-MSB-A
                 <span
                     >Restricci&oacute;n aeron&aacute;utica derivada de las Superficies Limitadoras de Obst&aacute;culos
@@ -131,7 +137,7 @@
                     Ver Google Sat&eacute;lite
                 </label>
 
-                <div class="legend-range-label">Transparencia del sat&eacute;lite:</div>
+                <label class="legend-range-label" for="opacity-slider">Transparencia del sat&eacute;lite:</label>
                 <input type="range" min="0" max="1" step="0.01" value="1" id="opacity-slider" />
 
                 <hr class="legend-separator" />
@@ -154,7 +160,7 @@
         <button id="info-panel-toggle" class="info-panel-toggle" type="button">&#9664; BASE LEGAL Y NOTAS</button>
         <aside id="info-panel" class="info-panel">
             <section class="info-section">
-                <h3>BASE LEGAL</h3>
+                <h2>BASE LEGAL</h2>
                 <ul>
                     <li>Ley N&deg; 27261 - Ley de Aeron&aacute;utica Civil</li>
                     <li>
@@ -176,7 +182,7 @@
                 </ul>
             </section>
             <section class="info-section">
-                <h3>NOTA 1</h3>
+                <h2>NOTA 1</h2>
                 <p>
                     El presente plano no otorga derechos edificatorios ni constituye regulaci&oacute;n
                     urban&iacute;stica de altura. Las altitudes consignadas corresponden exclusivamente a las
@@ -185,7 +191,7 @@
                 </p>
             </section>
             <section class="info-section">
-                <h3>NOTA 2</h3>
+                <h2>NOTA 2</h2>
                 <p>
                     En los casos en que un predio se ubique en m&aacute;s de un cuadrante SLO, ser&aacute; de
                     aplicaci&oacute;n la altitud m&aacute;s restrictiva, conforme a la determinaci&oacute;n de la

@@ -539,7 +539,7 @@ attributionList.innerHTML = `
 `;
 var bottomAttributionUl = bottomAttribution.element.querySelector('ul');
 if (bottomAttributionUl) {
-  bottomAttribution.element.insertBefore(attributionList, bottomAttributionUl);
+  bottomAttributionUl.insertBefore(attributionList, bottomAttributionUl.firstChild);
 }
 
 

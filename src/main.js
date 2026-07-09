@@ -17,8 +17,14 @@ function bootVisor() {
     return visorBootPromise;
 }
 
-function closeWelcomeModal() {
+async function closeWelcomeModal() {
     const modal = document.getElementById("welcome-modal-overlay");
+
+    document.querySelectorAll("[data-action='close-welcome']").forEach((button) => {
+        button.disabled = true;
+    });
+
+    await bootVisor();
 
     if (modal) {
         modal.classList.add("is-closing");
@@ -26,15 +32,19 @@ function closeWelcomeModal() {
             modal.hidden = true;
         }, 260);
     }
-
-    void bootVisor();
 }
 
 document.querySelectorAll("[data-action='close-welcome']").forEach((button) => {
     button.addEventListener("click", closeWelcomeModal);
 });
 
-void bootVisor();
+window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+        window.setTimeout(() => {
+            void bootVisor();
+        }, 350);
+    });
+});
 
 window.bootVisor = bootVisor;
 window.closeWelcomeModal = closeWelcomeModal;
