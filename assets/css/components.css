@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(80, 44, 44, 0.85);
+    background: rgba(44, 62, 80, 0.85);
     opacity: 1;
     transition:
         opacity 0.26s ease,
