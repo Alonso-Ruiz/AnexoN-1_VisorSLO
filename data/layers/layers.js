@@ -1,15 +1,17 @@
 ﻿var wms_layers = [];
 var format_lotesSanBorja_1 = new ol.format.GeoJSON();
-var features_lotesSanBorja_1 = format_lotesSanBorja_1.readFeatures(json_lotesSanBorja_1,
-    { dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857' });
 var jsonSource_lotesSanBorja_1 = new ol.source.Vector({
     attributions: ' ',
 });
-jsonSource_lotesSanBorja_1.addFeatures(features_lotesSanBorja_1);
 var lyr_lotesSanBorja_1 = new ol.layer.Vector({
     declutter: false,
+    maxResolution: 4,
+    renderBuffer: 48,
     source: jsonSource_lotesSanBorja_1,
-    style: style_lotesSanBorja_1,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({color: 'rgba(115,115,115,0.85)', width: 0.75}),
+        fill: new ol.style.Fill({color: 'rgba(240,238,238,1)'})
+    }),
     popuplayertitle: 'lotes San Borja',
     interactive: false,
     title: '<img src="data/styles/legend/lotesSanBorja_1.png" /> lotes San Borja'

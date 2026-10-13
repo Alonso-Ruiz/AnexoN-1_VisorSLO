@@ -16,9 +16,9 @@
     </head>
     <body>
         <div id="welcome-modal-overlay" class="welcome-overlay">
-            <div id="welcome-modal" class="welcome-modal">
+            <div id="welcome-modal" class="welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
                 <button class="close-btn" type="button" aria-label="Cerrar bienvenida" data-action="close-welcome">
-                    x
+                    <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
                 <img
                     class="welcome-logo"
@@ -27,14 +27,26 @@
                     height="202"
                     alt="Escudo de San Borja"
                 />
-                <h2>DECRETO DE ALCALD&Iacute;A N&deg; 003-2026-MSB-A</h2>
-                <p>
-                    Bienvenido al visor interactivo de la Restricci&oacute;n Aeron&aacute;utica derivada de las
-                    Superficies Limitadoras de Obst&aacute;culos (SLO) del Aer&oacute;dromo Las Palmas. Este visor es
-                    una herramienta de consulta referencial sobre las altitudes m&aacute;ximas permitidas de acuerdo a
-                    la normativa vigente.
+                <h2 id="welcome-title">MUNICIPALIDAD DE SAN BORJA</h2>
+                <h3>Restricci&oacute;n aeron&aacute;utica derivada de las Superficies Limitadoras de Obst&aacute;culos (SLO) del Aer&oacute;dromo Las Palmas</h3>
+                <p class="welcome-decree">DECRETO DE ALCALD&Iacute;A N&deg; 003-2026-MSB-A</p>
+                <p class="welcome-description">
+                    Este visor permite consultar de forma referencial la altitud del terreno y la diferencia de
+                    altitud permitida por las SLO en cada cuadrante del Aer&oacute;dromo Las Palmas.
                 </p>
-                <button class="primary-button" type="button" data-action="close-welcome">Ingresar al Visor</button>
+                <div class="welcome-guide">
+                    <h4>&iquest;C&oacute;mo usar el visor?</h4>
+                    <ul>
+                        <li>Busque una v&iacute;a o avenida para ubicarla en el mapa.</li>
+                        <li>Seleccione un cuadrante para consultar las altitudes y la altura m&aacute;xima sobre el terreno.</li>
+                        <li>Revise la leyenda y la base legal para interpretar la informaci&oacute;n.</li>
+                    </ul>
+                </div>
+                <button class="primary-button" type="button" data-action="close-welcome">INGRESAR AL VISOR</button>
+                <div class="welcome-footer">
+                    <strong>Fuente: Municipalidad de San Borja</strong>
+                    <span>Consulta referencial sujeta a la normativa aeron&aacute;utica vigente.</span>
+                </div>
             </div>
         </div>
 
@@ -56,20 +68,25 @@
             aria-labelledby="institutional-heading"
             aria-live="polite"
         >
-            <h1 id="institutional-heading">
-                DECRETO DE ALCALD&Iacute;A N&deg; 003-2026-MSB-A
+            <div class="institutional-brand">
+                <img src="./assets/img/escudo-san-borja-180.webp" width="180" height="202" alt="" />
+                <strong>Municipalidad<br />de San Borja</strong>
+            </div>
+            <div class="institutional-copy">
+                <h1 id="institutional-heading">DECRETO DE ALCALD&Iacute;A N&deg; 003-2026-MSB-A</h1>
                 <span
                     >Restricci&oacute;n aeron&aacute;utica derivada de las Superficies Limitadoras de Obst&aacute;culos
                     (SLO) del Aer&oacute;dromo Las Palmas</span
                 >
-            </h1>
+            </div>
         </header>
 
         <div id="search-container" class="search-container">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg class="search-icon search-icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
                 <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
+            <i class="fas fa-search search-icon search-icon-fa" aria-hidden="true"></i>
             <input
                 type="text"
                 id="street-search"
@@ -92,7 +109,17 @@
                     />
                     <path d="M12 2V17L18 22L12 2Z" fill="#e74c3c" />
                 </svg>
-                <span>N</span>
+                <i class="fas fa-compass" aria-hidden="true"></i>
+                <svg class="mobile-north-svg" viewBox="0 0 24 24" aria-hidden="true">
+                    <polygon points="12 2 19 21 12 17 5 21 12 2" fill="#009879"></polygon>
+                </svg>
+                <span class="mobile-north-mark" aria-hidden="true">
+                    <span class="north-needle">
+                        <span class="north-needle-north"></span>
+                        <span class="north-needle-south"></span>
+                    </span>
+                    <small>N</small>
+                </span>
             </span>
         </button>
 
@@ -138,7 +165,7 @@
                 </label>
 
                 <label class="legend-range-label" for="opacity-slider">Transparencia del sat&eacute;lite:</label>
-                <input type="range" min="0" max="1" step="0.01" value="1" id="opacity-slider" />
+                <input type="range" min="0" max="1" step="0.01" value="0.5" id="opacity-slider" />
 
                 <hr class="legend-separator" />
 
@@ -159,49 +186,76 @@
 
         <button id="info-panel-toggle" class="info-panel-toggle" type="button">&#9664; BASE LEGAL Y NOTAS</button>
         <aside id="info-panel" class="info-panel">
-            <section class="info-section">
+            <div class="mobile-sheet-handle" aria-hidden="true"></div>
+            <div class="mobile-sheet-header">
                 <h2>BASE LEGAL</h2>
-                <ul>
-                    <li>Ley N&deg; 27261 - Ley de Aeron&aacute;utica Civil</li>
-                    <li>
-                        Decreto Supremo N&deg; 050-2001-MTC - Reglamento de la Ley de Aeron&aacute;utica Civil del
-                        Per&uacute;.
-                    </li>
-                    <li>
-                        Regulaci&oacute;n Aeron&aacute;utica Peruana - RAP 314 AER&Oacute;DROMOS - VOLUMEN I -
-                        Dise&ntilde;o y operaciones de aer&oacute;dromos. Referencia: Anexo 14 (OACI) Aer&oacute;dromos.
-                    </li>
-                    <li>
-                        Manual de Servicios de Aeropuertos (Doc. 9137) Parte 6 - Limitaciones de Obst&aacute;culos de la
-                        OACI como documento t&eacute;cnico del Anexo 14.
-                    </li>
-                    <li>
-                        Resoluci&oacute;n Directoral N&deg;0579-2021-MTC/12 del 18/11/21 - Autorizaci&oacute;n del
-                        funcionamiento del Aer&oacute;dromo Privado "Las Palmas".
-                    </li>
-                </ul>
-            </section>
-            <section class="info-section">
-                <h2>NOTA 1</h2>
-                <p>
-                    El presente plano no otorga derechos edificatorios ni constituye regulaci&oacute;n
-                    urban&iacute;stica de altura. Las altitudes consignadas corresponden exclusivamente a las
-                    limitaciones establecidas por la normativa aeron&aacute;utica vigente, en el marco de las
-                    Superficies Limitadoras de Obst&aacute;culos (SLO).
-                </p>
-            </section>
-            <section class="info-section">
-                <h2>NOTA 2</h2>
-                <p>
-                    En los casos en que un predio se ubique en m&aacute;s de un cuadrante SLO, ser&aacute; de
-                    aplicaci&oacute;n la altitud m&aacute;s restrictiva, conforme a la determinaci&oacute;n de la
-                    normativa aeron&aacute;utica. Excepcionalmente, podr&aacute; considerarse la altitud correspondiente
-                    al cuadrante contiguo cuando la superficie del predio comprendida en dicho cuadrante represente,
-                    como m&iacute;nimo, el ochenta por ciento (80 %) del &aacute;rea total, sin perjuicio de las
-                    autorizaciones sectoriales que correspondan.
-                </p>
-            </section>
+                <button id="mobile-info-close" class="mobile-sheet-close" type="button" aria-label="Cerrar base legal">&times;</button>
+            </div>
+            <div class="mobile-sheet-body">
+                <section class="info-section">
+                    <h2>BASE LEGAL</h2>
+                    <ul>
+                        <li>Ley N&deg; 27261 - Ley de Aeron&aacute;utica Civil</li>
+                        <li>
+                            Decreto Supremo N&deg; 050-2001-MTC - Reglamento de la Ley de Aeron&aacute;utica Civil del
+                            Per&uacute;.
+                        </li>
+                        <li>
+                            Regulaci&oacute;n Aeron&aacute;utica Peruana - RAP 314 AER&Oacute;DROMOS - VOLUMEN I -
+                            Dise&ntilde;o y operaciones de aer&oacute;dromos. Referencia: Anexo 14 (OACI) Aer&oacute;dromos.
+                        </li>
+                        <li>
+                            Manual de Servicios de Aeropuertos (Doc. 9137) Parte 6 - Limitaciones de Obst&aacute;culos de la
+                            OACI como documento t&eacute;cnico del Anexo 14.
+                        </li>
+                        <li>
+                            Resoluci&oacute;n Directoral N&deg;0579-2021-MTC/12 del 18/11/21 - Autorizaci&oacute;n del
+                            funcionamiento del Aer&oacute;dromo Privado "Las Palmas".
+                        </li>
+                    </ul>
+                </section>
+                <section class="info-section">
+                    <h2>NOTA 1</h2>
+                    <p>
+                        El presente plano no otorga derechos edificatorios ni constituye regulaci&oacute;n
+                        urban&iacute;stica de altura. Las altitudes consignadas corresponden exclusivamente a las
+                        limitaciones establecidas por la normativa aeron&aacute;utica vigente, en el marco de las
+                        Superficies Limitadoras de Obst&aacute;culos (SLO).
+                    </p>
+                </section>
+                <section class="info-section">
+                    <h2>NOTA 2</h2>
+                    <p>
+                        En los casos en que un predio se ubique en m&aacute;s de un cuadrante SLO, ser&aacute; de
+                        aplicaci&oacute;n la altitud m&aacute;s restrictiva, conforme a la determinaci&oacute;n de la
+                        normativa aeron&aacute;utica. Excepcionalmente, podr&aacute; considerarse la altitud correspondiente
+                        al cuadrante contiguo cuando la superficie del predio comprendida en dicho cuadrante represente,
+                        como m&iacute;nimo, el ochenta por ciento (80 %) del &aacute;rea total, sin perjuicio de las
+                        autorizaciones sectoriales que correspondan.
+                    </p>
+                </section>
+            </div>
         </aside>
+
+        <section id="mobile-transparency-panel" class="mobile-transparency-panel" aria-label="Transparencia del mapa">
+            <label for="mobile-opacity-slider">Transparencia del mapa</label>
+            <input type="range" min="0" max="1" step="0.01" value="0.5" id="mobile-opacity-slider" />
+        </section>
+
+        <nav id="mobile-bottom-nav" class="mobile-bottom-nav" aria-label="Herramientas del visor">
+            <button type="button" data-mobile-panel="legend" aria-controls="custom-legend">
+                <i class="fas fa-list" aria-hidden="true"></i>
+                <span>Leyenda</span>
+            </button>
+            <button type="button" data-mobile-panel="transparency" aria-controls="mobile-transparency-panel">
+                <i class="fas fa-adjust" aria-hidden="true"></i>
+                <span>Transparencia</span>
+            </button>
+            <button type="button" data-mobile-panel="legal" aria-controls="info-panel">
+                <i class="fas fa-file-alt" aria-hidden="true"></i>
+                <span>Base legal</span>
+            </button>
+        </nav>
 
         <main id="map">
             <div id="popup" class="ol-popup">

@@ -11,6 +11,10 @@
             return;
         }
 
+        if (window.matchMedia("(min-width: 769px)").matches) {
+            window.map.getView().setZoom(window.map.getView().getZoom() - 1);
+        }
+
         window.VisorUi.init(window.map);
 
         var highlightOverlay = window.VisorLayers.configure(window.map);

@@ -5,7 +5,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(44, 62, 80, 0.85);
+    padding: 16px;
+    box-sizing: border-box;
+    background: rgba(24, 28, 28, 0.84);
     opacity: 1;
     transition:
         opacity 0.26s ease,
@@ -21,72 +23,182 @@
 
 .welcome-modal {
     position: relative;
-    width: 85%;
-    max-width: 450px;
-    padding: 30px;
+    width: min(500px, 100%);
+    max-height: calc(100dvh - 32px);
+    padding: 20px 28px 18px;
+    box-sizing: border-box;
+    overflow-y: auto;
     border-radius: 8px;
     background: var(--color-surface);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28);
     text-align: center;
 }
 
 .welcome-logo {
     display: block;
-    width: 96px;
-    max-width: 32vw;
-    height: 110px;
-    margin: 0 auto 15px;
+    width: 80px;
+    height: 92px;
+    margin: 0 auto 9px;
     object-fit: contain;
 }
 
 .close-btn {
     position: absolute;
     top: 12px;
-    right: 15px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 0;
-    background: transparent;
-    color: #95a5a6;
+    border-radius: 50%;
+    background: #f5f7f8;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+    color: #495159;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
 }
 
-.close-btn:hover {
-    color: var(--color-accent);
+.close-btn:hover,
+.close-btn:focus-visible {
+    background: #eaf5f0;
+    color: #008966;
 }
 
 .welcome-modal h2 {
-    display: inline-block;
-    margin-top: 0;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--color-accent);
-    color: var(--color-primary);
-    font-size: 16px;
-    line-height: 1.4;
+    margin: 0 0 7px;
+    color: #008966;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.15;
 }
 
-.welcome-modal p {
-    margin-bottom: 20px;
-    color: #555555;
+.welcome-modal h3 {
+    margin: 0;
+    color: #353a3e;
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.25;
+}
+
+.welcome-decree {
+    margin: 8px 0 0;
+    color: #6b7478;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.welcome-description {
+    margin: 14px 0 12px;
+    color: #555e63;
     font-size: 13px;
-    line-height: 1.6;
+    line-height: 1.45;
     text-align: justify;
 }
 
+.welcome-guide {
+    padding-top: 12px;
+    border-top: 1px solid #e5e9e8;
+    color: #555e63;
+    text-align: left;
+}
+
+.welcome-guide h4 {
+    margin: 0 0 8px;
+    color: #4a5356;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.welcome-guide ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.welcome-footer {
+    display: grid;
+    gap: 5px;
+    margin-top: 13px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e9e8;
+    color: #7a8387;
+    font-size: 10px;
+    line-height: 1.3;
+}
+
 .primary-button {
-    padding: 10px 25px;
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 14px;
     border: 0;
-    border-radius: 20px;
-    background: var(--color-primary);
+    border-radius: 8px;
+    background: #008966;
     color: #ffffff;
     cursor: pointer;
     font-size: 13px;
-    font-weight: bold;
-    transition: background 0.3s;
+    font-weight: 800;
+    transition: background 0.2s ease;
 }
 
-.primary-button:hover {
-    background: var(--color-accent);
+.primary-button:hover,
+.primary-button:focus-visible {
+    background: #006d52;
+}
+
+@media (max-width: 600px) {
+    .welcome-modal {
+        padding: 20px 20px 18px;
+    }
+
+    .welcome-logo {
+        width: 70px;
+        height: 80px;
+        margin-bottom: 9px;
+    }
+
+    .close-btn {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .welcome-modal h2 {
+        font-size: 18px;
+    }
+
+    .welcome-modal h3 {
+        font-size: 14px;
+    }
+
+    .welcome-description {
+        margin: 13px 0 11px;
+        font-size: 12px;
+    }
+
+    .welcome-guide h4 {
+        font-size: 13px;
+    }
+
+    .welcome-guide ul {
+        margin-bottom: 12px;
+        font-size: 12px;
+    }
+
+    .primary-button {
+        min-height: 40px;
+        font-size: 12px;
+    }
+
+    .welcome-footer {
+        margin-top: 13px;
+        padding-top: 12px;
+        font-size: 10px;
+    }
 }
 
 .institutional-title {
@@ -257,6 +369,26 @@
 
 .north-icon {
     transition: transform 0.1s linear;
+}
+
+.search-icon-fa {
+    display: none;
+}
+
+.north-arrow .fa-compass {
+    display: none;
+}
+
+.north-arrow small {
+    display: none;
+}
+
+.mobile-north-mark {
+    display: none;
+}
+
+.mobile-north-svg {
+    display: none;
 }
 
 .north-arrow svg {
@@ -447,6 +579,17 @@ input[type="range"] {
 .info-panel-toggle.open {
     right: 350px;
     background: var(--color-accent);
+}
+
+.mobile-sheet-handle,
+.mobile-sheet-header,
+.mobile-bottom-nav,
+.mobile-transparency-panel {
+    display: none;
+}
+
+.mobile-sheet-body {
+    display: contents;
 }
 
 .info-section {

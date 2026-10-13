@@ -58,11 +58,9 @@ window.Autolinker = Autolinker;
 const legacyScripts = [
     "vendor/resources/qgis2web_expressions.js",
     "vendor/resources/functions.js",
-    "data/layers/lotesSanBorja_1.js",
     "data/layers/CuadranteSLO100mx100m_2.js",
     "data/layers/LmiteSuperficieCnica_3.js",
     "data/layers/Lmitedistrital_SanBorja_4.js",
-    "data/styles/lotesSanBorja_1_style.js",
     "data/styles/CuadranteSLO100mx100m_2_style.js",
     "data/styles/LmiteSuperficieCnica_3_style.js",
     "data/styles/Lmitedistrital_SanBorja_4_style.js",

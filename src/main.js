@@ -1,5 +1,6 @@
 import "ol/ol.css";
 import "../vendor/resources/qgis2web.css";
+import "../vendor/resources/fontawesome-all.min.css";
 import "../assets/css/base.css";
 import "../assets/css/components.css";
 import "../assets/css/responsive.css";

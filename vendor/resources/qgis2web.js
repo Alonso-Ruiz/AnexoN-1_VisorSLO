@@ -143,8 +143,8 @@ var featureOverlay = new ol.layer.Vector({
             color: 'rgba(255,0,0,0.1)'
         }),
     })],
-    updateWhileAnimating: true, // optional, for instant visual feedback
-    updateWhileInteracting: true // optional, for instant visual feedback
+    updateWhileAnimating: false,
+    updateWhileInteracting: false
 });
 
 var doHighlight = false;

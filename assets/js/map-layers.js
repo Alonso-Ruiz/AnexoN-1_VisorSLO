@@ -19,6 +19,11 @@
     function bindSatelliteControls(satelliteLayer) {
         var toggle = document.getElementById("googleMapsToggle");
         var opacitySlider = document.getElementById("opacity-slider");
+        var mobileOpacitySlider = document.getElementById("mobile-opacity-slider");
+
+        var initialOpacity = String(satelliteLayer.getOpacity());
+        if (opacitySlider) opacitySlider.value = initialOpacity;
+        if (mobileOpacitySlider) mobileOpacitySlider.value = initialOpacity;
 
         if (toggle) {
             toggle.addEventListener("change", function (event) {
@@ -27,17 +32,20 @@
         }
 
         if (opacitySlider) {
-            opacitySlider.addEventListener("input", function (event) {
-                var value = parseFloat(event.target.value);
+            opacitySlider.addEventListener("input", updateOpacity);
+        }
 
-                if (value === 0) {
-                    satelliteLayer.setVisible(false);
-                    return;
-                }
+        if (mobileOpacitySlider) {
+            mobileOpacitySlider.addEventListener("input", updateOpacity);
+        }
 
-                satelliteLayer.setVisible(true);
-                satelliteLayer.setOpacity(value);
-            });
+        function updateOpacity(event) {
+            var value = parseFloat(event.target.value);
+
+            satelliteLayer.setVisible(value > 0);
+            satelliteLayer.setOpacity(value);
+            if (opacitySlider) opacitySlider.value = event.target.value;
+            if (mobileOpacitySlider) mobileOpacitySlider.value = event.target.value;
         }
     }
 
@@ -123,6 +131,70 @@
         });
     }
 
+    function loadScript(path) {
+        return new Promise(function (resolve, reject) {
+            var script = document.createElement("script");
+
+            script.src = path;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = function () {
+                reject(new Error("No se pudo cargar " + path));
+            };
+            document.body.appendChild(script);
+        });
+    }
+
+    function configureDeferredLots(map) {
+        var lotsLayer = window.lyr_lotesSanBorja_1;
+        var lotsSource = window.jsonSource_lotesSanBorja_1;
+        var format = window.format_lotesSanBorja_1;
+        var loading = false;
+        var loaded = false;
+        var loadResolution = window.VisorConfig.performance.lotsLoadResolution;
+
+        if (!lotsLayer || !lotsSource || !format) {
+            return;
+        }
+
+        function shouldLoadLots() {
+            return map.getView().getResolution() <= loadResolution;
+        }
+
+        function loadLots() {
+            if (loaded || loading || !shouldLoadLots()) {
+                return;
+            }
+
+            loading = true;
+            Promise.all([
+                loadScript(window.VisorConfig.paths.lotsStyleScript),
+                loadScript(window.VisorConfig.paths.lotsLayerScript)
+            ]).then(function () {
+                var features = format.readFeatures(window.json_lotesSanBorja_1, {
+                    dataProjection: "EPSG:4326",
+                    featureProjection: "EPSG:3857"
+                });
+
+                lotsSource.addFeatures(features);
+
+                if (window.style_lotesSanBorja_1) {
+                    lotsLayer.setStyle(window.style_lotesSanBorja_1);
+                }
+
+                window.json_lotesSanBorja_1 = null;
+                loaded = true;
+            }).catch(function (error) {
+                console.error(error);
+            }).finally(function () {
+                loading = false;
+            });
+        }
+
+        map.on("moveend", loadLots);
+        window.setTimeout(loadLots, 800);
+    }
+
     function configureProjectLayers(map) {
         var satelliteLayer = createSatelliteLayer();
 
@@ -139,12 +211,13 @@
 
         applyDistrictBoundaryStyle();
         applySloGridStyle();
+        configureDeferredLots(map);
 
         map.addControl(new ol.control.ScaleLine({
             units: "metric",
             bar: false,
             text: true,
-            minWidth: 100
+            minWidth: window.matchMedia("(max-width: 768px)").matches ? 48 : 100
         }));
 
         return createHighlightOverlay(map);

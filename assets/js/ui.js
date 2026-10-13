@@ -40,6 +40,44 @@
         }
     }
 
+    function closeMobilePanels() {
+        document.body.classList.remove("mobile-legend-open", "mobile-transparency-open", "mobile-legal-open");
+        document.querySelectorAll("[data-mobile-panel]").forEach(function (button) {
+            button.classList.remove("is-active");
+            button.setAttribute("aria-expanded", "false");
+        });
+    }
+
+    function setMobilePanel(panelName) {
+        var className = "mobile-" + panelName + "-open";
+        var isOpen = document.body.classList.contains(className);
+
+        closeMobilePanels();
+        if (isOpen) {
+            return;
+        }
+
+        document.body.classList.add(className);
+        var button = document.querySelector("[data-mobile-panel='" + panelName + "']");
+        if (button) {
+            button.classList.add("is-active");
+            button.setAttribute("aria-expanded", "true");
+        }
+    }
+
+    function bindMobileNavigation() {
+        document.querySelectorAll("[data-mobile-panel]").forEach(function (button) {
+            button.addEventListener("click", function () {
+                setMobilePanel(button.dataset.mobilePanel);
+            });
+        });
+
+        var closeButton = document.getElementById("mobile-info-close");
+        if (closeButton) {
+            closeButton.addEventListener("click", closeMobilePanels);
+        }
+    }
+
     function bindInstitutionalInfo() {
         var panel = document.getElementById("institutional-title");
         var button = document.getElementById("institutional-info-button");
@@ -54,6 +92,12 @@
         }
 
         button.dataset.boundInstitutionalInfo = "true";
+
+        if (window.innerWidth > 768) {
+            panel.classList.add("is-visible");
+            button.setAttribute("aria-expanded", "false");
+            return;
+        }
 
         function showPanel() {
             window.clearTimeout(hideTimer);
@@ -131,6 +175,7 @@
         bindInstitutionalInfo();
         bindDeclarativeActions();
         bindPanelToggle();
+        bindMobileNavigation();
         bindContextMenuGuard();
         bindNorthRotation(map);
     }
