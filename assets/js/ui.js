@@ -15,6 +15,10 @@
     }
 
     function toggleLegend() {
+        if (document.body.classList.contains("mobile-legend-open")) {
+            closeMobilePanels();
+            return;
+        }
         var content = document.getElementById("legend-content");
         var icon = document.getElementById("legend-icon");
         var text = window.VisorConfig.text;

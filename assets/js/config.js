@@ -37,8 +37,8 @@
         text: {
             panelOpen: "CERRAR",
             panelClosed: "\u25c0 BASE LEGAL Y NOTAS",
-            legendOpenIcon: "\u25bc",
-            legendClosedIcon: "\u25b2"
+            legendOpenIcon: "\u00d7",
+            legendClosedIcon: "+"
         }
     };
 })(window);

@@ -42,13 +42,6 @@
             "metros maximos sobre el terreno"
         ));
 
-        if (properties.Altitud_mi !== undefined && properties.Altitud_ma !== undefined) {
-            wrapper.appendChild(createPopupSection(
-                "Rango de altitud del terreno:",
-                properties.Altitud_mi + " – " + properties.Altitud_ma,
-                "m s.n.m."
-            ));
-        }
 
         while (container.firstChild) {
             container.removeChild(container.firstChild);

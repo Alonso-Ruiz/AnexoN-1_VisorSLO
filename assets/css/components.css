@@ -449,6 +449,55 @@
 #legend-icon {
     flex-shrink: 0;
     margin-left: 16px;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.legal-documents {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 1px solid #dce8e5;
+    padding-top: 10px;
+}
+
+.legal-document {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #005b4d;
+}
+
+.legal-document:first-child,
+.legal-document:hover,
+.legal-document:focus-visible {
+    background: #eaf6f1;
+}
+
+.legal-document:focus-visible {
+    outline: 2px solid #005b4d;
+    outline-offset: 2px;
+}
+
+.legal-document .fa-file-pdf {
+    color: #d9232b;
+    font-size: 23px;
+    margin-top: 2px;
+}
+
+.legal-document strong,
+.legal-document small {
+    display: block;
+}
+
+.legal-document small {
+    margin-top: 4px;
+    color: #5f716c;
+    font-size: 13px;
+    line-height: 1.45;
 }
 
 .legend-content {
