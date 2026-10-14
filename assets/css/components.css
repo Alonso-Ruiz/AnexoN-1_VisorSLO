@@ -473,6 +473,12 @@
     cursor: pointer;
 }
 
+.legend-content .layer-toggle.additional-layer-toggle {
+    display: flex;
+    margin-top: 7px;
+    font-weight: 500;
+}
+
 .legend-range-label {
     display: block;
     margin: 12px 0 6px;
@@ -499,6 +505,20 @@
     height: 12px;
     margin-right: 10px;
     box-sizing: border-box;
+}
+
+.height-scale-bar {
+    display: block;
+    flex: 0 0 20px;
+    height: 12px;
+    margin-right: 10px;
+    border: 1px solid rgba(72, 79, 72, 0.35);
+    background: linear-gradient(90deg, rgba(231, 108, 108, 0.58), rgba(239, 162, 91, 0.58), rgba(239, 213, 112, 0.58), rgba(111, 190, 137, 0.58));
+}
+
+.legend-height-scale small {
+    color: #747b7d;
+    font-size: 10px;
 }
 
 .legend-color.selected {
@@ -647,6 +667,7 @@ input[type="range"] {
     border-radius: 6px;
     background: var(--color-surface);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    max-width: min(360px, calc(100vw - 32px));
 }
 
 .ol-popup::after,
@@ -695,7 +716,29 @@ input[type="range"] {
 
 .slo-popup {
     min-width: 200px;
+    max-width: 320px;
     font-family: var(--font-ui);
+}
+
+.slo-popup-title {
+    margin: 0 18px 8px 0;
+    color: var(--color-primary);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.slo-popup-heading {
+    margin: 0 0 8px;
+    color: var(--color-text);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.slo-popup-description {
+    color: var(--color-text);
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: pre-line;
 }
 
 .slo-popup-section {

@@ -17,6 +17,26 @@
 
         window.VisorUi.init(window.map);
 
+        // The custom popup owns selection; avoid a second hit scan and popup render.
+        ["onSingleClickFeatures", "onSingleClickWMS"].forEach(function (name) {
+            if (typeof window[name] === "function") window.map.un("singleclick", window[name]);
+        });
+        if (typeof window.onPointerMove === "function") window.map.un("pointermove", window.onPointerMove);
+        if (typeof window.pointerOnFeature === "function") {
+            window.map.un("pointermove", window.pointerOnFeature);
+            var hoverTimer;
+            window.map.on("pointermove", function (event) {
+                window.clearTimeout(hoverTimer);
+                if (event.dragging) return;
+                hoverTimer = window.setTimeout(function () {
+                    if (!window.map.getView().getInteracting() && !window.map.getView().getAnimating()) {
+                        window.pointerOnFeature(event);
+                    }
+                }, 80);
+            });
+            window.map.on("movestart", function () { window.clearTimeout(hoverTimer); });
+        }
+
         var highlightOverlay = window.VisorLayers.configure(window.map);
         var searchInitialized = false;
 

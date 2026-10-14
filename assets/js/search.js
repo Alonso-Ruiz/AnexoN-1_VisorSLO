@@ -16,6 +16,7 @@
     }
 
     function createStreetLayer(streetSource) {
+        var styles = new WeakMap();
         return new ol.layer.Vector({
             source: streetSource,
             declutter: true,
@@ -26,7 +27,8 @@
                     return null;
                 }
 
-                return new ol.style.Style({
+                if (styles.has(feature)) return styles.get(feature);
+                var style = new ol.style.Style({
                     text: new ol.style.Text({
                         text: streetName,
                         placement: "line",
@@ -37,6 +39,8 @@
                     }),
                     zIndex: window.VisorConfig.layers.zIndex.streets
                 });
+                styles.set(feature, style);
+                return style;
             },
             zIndex: window.VisorConfig.layers.zIndex.streets
         });

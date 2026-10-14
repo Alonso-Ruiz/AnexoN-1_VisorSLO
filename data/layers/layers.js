@@ -3,7 +3,8 @@ var format_lotesSanBorja_1 = new ol.format.GeoJSON();
 var jsonSource_lotesSanBorja_1 = new ol.source.Vector({
     attributions: ' ',
 });
-var lyr_lotesSanBorja_1 = new ol.layer.Vector({
+var lyr_lotesSanBorja_1 = new ol.layer.VectorImage({
+    imageRatio: 1.5,
     declutter: false,
     maxResolution: 4,
     renderBuffer: 48,

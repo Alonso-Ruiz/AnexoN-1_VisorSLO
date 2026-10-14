@@ -169,6 +169,20 @@
 
                 <hr class="legend-separator" />
 
+                <label class="layer-toggle additional-layer-toggle">
+                    <input type="checkbox" data-additional-layer-group="surfaces" checked />
+                    Superficies SLO y aproximaciones
+                </label>
+                <label class="layer-toggle additional-layer-toggle">
+                    <input type="checkbox" data-additional-layer-group="districts" checked />
+                    Distritos de Lima Metropolitana
+                </label>
+
+                <div class="legend-item legend-height-scale">
+                    <span class="height-scale-bar" aria-hidden="true"></span>
+                    <span>Altura m&aacute;xima permitida sobre el terreno<br /><small>Menos metros &larr; &rarr; M&aacute;s metros</small></span>
+                </div>
+
                 <div class="legend-item">
                     <div class="legend-color selected"></div>
                     <span>Cuadrante seleccionado</span>
@@ -250,6 +264,10 @@
             <button type="button" data-mobile-panel="transparency" aria-controls="mobile-transparency-panel">
                 <i class="fas fa-adjust" aria-hidden="true"></i>
                 <span>Transparencia</span>
+            </button>
+            <button type="button" data-toggle-layer-group="mesh" aria-label="Mostrar u ocultar la cuadrícula roja y sus líneas" aria-pressed="false">
+                <i class="fas fa-th" aria-hidden="true"></i>
+                <span>Cuadrícula</span>
             </button>
             <button type="button" data-mobile-panel="legal" aria-controls="info-panel">
                 <i class="fas fa-file-alt" aria-hidden="true"></i>

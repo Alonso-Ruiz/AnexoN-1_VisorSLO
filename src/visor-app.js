@@ -12,6 +12,7 @@ import GeoJSON from "ol/format/GeoJSON.js";
 import LayerGroup from "ol/layer/Group.js";
 import TileLayer from "ol/layer/Tile.js";
 import VectorLayer from "ol/layer/Vector.js";
+import VectorImageLayer from "ol/layer/VectorImage.js";
 import VectorSource from "ol/source/Vector.js";
 import XYZ from "ol/source/XYZ.js";
 import CircleStyle from "ol/style/Circle.js";
@@ -38,7 +39,8 @@ window.ol = {
     layer: {
         Group: LayerGroup,
         Tile: TileLayer,
-        Vector: VectorLayer
+        Vector: VectorLayer,
+        VectorImage: VectorImageLayer
     },
     source: {
         Vector: VectorSource,
@@ -66,6 +68,20 @@ const legacyScripts = [
     "data/styles/Lmitedistrital_SanBorja_4_style.js",
     "data/layers/layers.js",
     "vendor/resources/qgis2web.js",
+    "data/additional-layers/layers/DistritosdeLimaMetropolitana_1.js",
+    "data/additional-layers/layers/BASEAEREALASPALMAS_2.js",
+    "data/additional-layers/layers/SuperficieCnicaSC_3.js",
+    "data/additional-layers/layers/SuperficieHorizontalInternaSHI_4.js",
+    "data/additional-layers/layers/SuperificedeAproximacinRWY_20_5.js",
+    "data/additional-layers/layers/SuperificedeAproximacinRWY_02_6.js",
+    "data/additional-layers/layers/PistadeAterrizaje_7.js",
+    "data/additional-layers/layers/UMBRAL20_8.js",
+    "data/additional-layers/layers/VerticalLineas_9.js",
+    "data/additional-layers/layers/HorizontalLineas_10.js",
+    "data/additional-layers/layers/02MallaVerticalHorizontal_12.js",
+    "data/additional-layers/layers/01MallaVerticalInicial_13.js",
+    "data/additional-layers/layers/lnealmite_of_15.js",
+    "data/additional-layers/additional-layers.js",
     "assets/js/config.js",
     "assets/js/ui.js",
     "assets/js/map-layers.js",
