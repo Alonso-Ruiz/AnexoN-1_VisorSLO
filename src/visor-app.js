@@ -61,50 +61,28 @@ window.ol = {
 
 window.Autolinker = Autolinker;
 
-const legacyScripts = [
-    "vendor/resources/qgis2web_expressions.js",
-    "vendor/resources/functions.js",
-    "data/layers/CuadranteSLO100mx100m_2.js",
-    "data/layers/LmiteSuperficieCnica_3.js",
-    "data/layers/Lmitedistrital_SanBorja_4.js",
-    "data/styles/CuadranteSLO100mx100m_2_style.js",
-    "data/styles/LmiteSuperficieCnica_3_style.js",
-    "data/styles/Lmitedistrital_SanBorja_4_style.js",
-    "data/layers/layers.js",
-    "vendor/resources/qgis2web.js",
-    "data/additional-layers/layers/DistritosdeLimaMetropolitana_1.js",
-    "data/additional-layers/layers/BASEAEREALASPALMAS_2.js",
-    "data/additional-layers/layers/SuperficieCnicaSC_3.js",
-    "data/additional-layers/layers/SuperficieHorizontalInternaSHI_4.js",
-    "data/additional-layers/layers/SuperificedeAproximacinRWY_20_5.js",
-    "data/additional-layers/layers/SuperificedeAproximacinRWY_02_6.js",
-    "data/additional-layers/layers/PistadeAterrizaje_7.js",
-    "data/additional-layers/layers/UMBRAL20_8.js",
-    "data/additional-layers/layers/VerticalLineas_9.js",
-    "data/additional-layers/layers/HorizontalLineas_10.js",
-    "data/additional-layers/layers/02MallaVerticalHorizontal_12.js",
-    "data/additional-layers/layers/01MallaVerticalInicial_13.js",
-    "data/additional-layers/layers/lnealmite_of_15.js",
-    "data/additional-layers/additional-layers.js",
-    "assets/js/config.js",
-    "assets/js/ui.js",
-    "assets/js/map-layers.js",
-    "assets/js/search.js",
-    "assets/js/popup.js",
-    "assets/js/app.js"
-];
+import legacyScripts from "./legacy-scripts.json";
+import legacyBundleUrl from "virtual:visor-legacy";
 
-function loadLegacyScript(path) {
+function loadLegacyScript(url) {
     return new Promise((resolve, reject) => {
         const script = document.createElement("script");
 
-        script.src = `${import.meta.env.BASE_URL}${path}`;
+        script.async = false;
+        script.src = url;
         script.onload = resolve;
-        script.onerror = () => reject(new Error(`No se pudo cargar ${path}`));
+        script.onerror = () => reject(new Error(`No se pudo cargar ${url}`));
         document.body.appendChild(script);
     });
 }
 
-for (const script of legacyScripts) {
-    await loadLegacyScript(script);
+if (legacyBundleUrl) {
+    await loadLegacyScript(legacyBundleUrl);
+} else {
+    // Download together; async=false preserves the required execution order.
+    await Promise.all(legacyScripts.map((path) => loadLegacyScript(`${import.meta.env.BASE_URL}${path}`)));
+}
+
+if (!window.VisorAppReady) {
+    throw new Error("El visor no pudo completar su inicialización.");
 }

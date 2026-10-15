@@ -1,13 +1,6 @@
 (function (window, document) {
     "use strict";
 
-    function closeWelcomeModal() {
-        var modal = document.getElementById("welcome-modal-overlay");
-        if (modal) {
-            modal.style.display = "none";
-        }
-    }
-
     function resetNorth() {
         if (window.map) {
             window.map.getView().animate({ rotation: 0, duration: 500 });
@@ -135,13 +128,8 @@
     }
 
     function bindDeclarativeActions() {
-        var closeButtons = document.querySelectorAll("[data-action='close-welcome']");
         var legendButtons = document.querySelectorAll("[data-action='toggle-legend']");
         var northButton = document.getElementById("north-arrow");
-
-        closeButtons.forEach(function (button) {
-            button.addEventListener("click", closeWelcomeModal);
-        });
 
         legendButtons.forEach(function (button) {
             button.addEventListener("click", toggleLegend);
@@ -184,7 +172,6 @@
         bindNorthRotation(map);
     }
 
-    window.closeWelcomeModal = closeWelcomeModal;
     window.resetNorth = resetNorth;
     window.toggleLegend = toggleLegend;
     window.bindInstitutionalInfo = bindInstitutionalInfo;

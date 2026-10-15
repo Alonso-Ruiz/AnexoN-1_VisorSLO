@@ -397,7 +397,7 @@
     }
 
     .ol-scale-line {
-        right: 36px !important;
+        right: 18px !important;
         bottom: 112px !important;
         left: auto !important;
         z-index: 1000;
@@ -405,6 +405,12 @@
         border-radius: 10px;
         background: rgba(255, 255, 255, 0.9) !important;
         box-shadow: 0 3px 10px rgba(20, 50, 48, 0.15);
+    }
+
+    .height-scale-control {
+        right: 18px;
+        bottom: 164px;
+        left: auto;
     }
 
     .ol-scale-line-inner {
@@ -554,6 +560,7 @@
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.97);
         box-shadow: 0 4px 12px rgba(15, 55, 48, 0.18);
+        transition: transform 0.35s ease;
     }
 
     .north-arrow > .north-icon > svg:not(.mobile-north-svg),
@@ -582,6 +589,7 @@
         border-radius: 14px;
         background: rgba(255, 255, 255, 0.97);
         box-shadow: 0 4px 12px rgba(15, 55, 48, 0.18);
+        transition: transform 0.35s ease;
     }
 
     .ol-zoom button {
@@ -614,6 +622,21 @@
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.93) !important;
         box-shadow: 0 3px 10px rgba(15, 55, 48, 0.16);
+        transition: transform 0.35s ease;
+    }
+
+    .height-scale-control {
+        right: 20px;
+        bottom: 71px;
+        left: auto;
+        transition: transform 0.35s ease;
+    }
+
+    body.mobile-legal-open .north-arrow,
+    body.mobile-legal-open .ol-zoom,
+    body.mobile-legal-open .ol-scale-line,
+    body.mobile-legal-open .height-scale-control {
+        transform: translateX(calc(-1 * clamp(300px, 30vw, 400px)));
     }
 
     .ol-scale-line-inner {

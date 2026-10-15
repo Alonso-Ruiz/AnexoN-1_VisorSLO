@@ -61,6 +61,7 @@
 
         scheduleSearch();
         window.VisorPopup.init(window.map, highlightOverlay);
+        window.VisorAppReady = true;
     }
 
     boot();

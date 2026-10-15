@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
-import { cpSync, existsSync, rmSync } from "node:fs";
+import { defineConfig, transformWithEsbuild } from "vite";
+import { cpSync, existsSync, rmSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { cwd } from "node:process";
 
@@ -43,9 +43,44 @@ function copyLegacyStaticAssets() {
     };
 }
 
+function bundleLegacyStartup() {
+    const moduleId = "virtual:visor-legacy";
+    let productionBuild = false;
+    let bundleReference;
+
+    return {
+        name: "bundle-legacy-startup",
+        configResolved(config) {
+            productionBuild = config.command === "build";
+        },
+        async buildStart() {
+            if (!productionBuild) return;
+            const paths = JSON.parse(readFileSync(resolve(cwd(), "src/legacy-scripts.json"), "utf8"));
+            const source = paths.map((path) => readFileSync(resolve(cwd(), path), "utf8")).join("\n;\n");
+            // Keep global names: the exported QGIS scripts share them at runtime.
+            const result = await transformWithEsbuild(source, "visor-legacy.js", {
+                minify: true,
+                minifyIdentifiers: false,
+                legalComments: "inline",
+                target: "es2022"
+            });
+            bundleReference = this.emitFile({ type: "asset", name: "visor-legacy.js", source: result.code });
+        },
+        resolveId(id) {
+            if (id === moduleId) return "\0" + moduleId;
+        },
+        load(id) {
+            if (id !== "\0" + moduleId) return;
+            return productionBuild
+                ? `export default import.meta.ROLLUP_FILE_URL_${bundleReference};`
+                : "export default null;";
+        }
+    };
+}
+
 export default defineConfig({
     base: "./",
-    plugins: [copyLegacyStaticAssets()],
+    plugins: [bundleLegacyStartup(), copyLegacyStaticAssets()],
     build: {
         sourcemap: false
     },

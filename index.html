@@ -10,6 +10,7 @@
         />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="preconnect" href="https://mt1.google.com" />
         <link rel="icon" type="image/png" href="./assets/img/logo-institucional.png" />
 
         <title>Restricci&oacute;n Aeron&aacute;utica - Las Palmas</title>
@@ -182,11 +183,6 @@
                     Distritos de Lima Metropolitana
                 </label>
 
-                <div class="legend-item legend-height-scale">
-                    <span class="height-scale-bar" aria-hidden="true"></span>
-                    <span>Restricci&oacute;n de altura<br /><small>Mayor restricci&oacute;n (rojo) &rarr; Menor restricci&oacute;n (verde)</small></span>
-                </div>
-
                 <div class="legend-item">
                     <div class="legend-color selected"></div>
                     <span>Cuadrante seleccionado</span>
@@ -299,6 +295,19 @@
                 <div id="popup-content"></div>
             </div>
         </main>
+
+        <aside class="height-scale-control" aria-label="Escala de altura SLO sobre el terreno">
+            <span class="height-scale-regime">Mayor<br>r&eacute;gimen</span>
+            <span class="height-scale-value">145 m</span>
+            <span class="height-scale-bar" aria-hidden="true"></span>
+            <span class="height-scale-regime">Menor<br>r&eacute;gimen</span>
+            <span class="height-scale-value">60 m</span>
+        </aside>
+
+        <div id="visor-loading-status" class="visor-loading-status" role="status" hidden>
+            <span id="visor-loading-message">Cargando el mapa…</span>
+            <button id="visor-loading-retry" type="button" hidden>Volver a intentar</button>
+        </div>
 
         <script type="module" src="/src/main.js"></script>
     </body>
