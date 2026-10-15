@@ -9,6 +9,9 @@ import Attribution from "ol/control/Attribution.js";
 import Control from "ol/control/Control.js";
 import ScaleLine from "ol/control/ScaleLine.js";
 import GeoJSON from "ol/format/GeoJSON.js";
+import Point from "ol/geom/Point.js";
+import MultiLineString from "ol/geom/MultiLineString.js";
+import Polygon from "ol/geom/Polygon.js";
 import LayerGroup from "ol/layer/Group.js";
 import TileLayer from "ol/layer/Tile.js";
 import VectorLayer from "ol/layer/Vector.js";
@@ -28,6 +31,7 @@ window.ol = {
     Overlay,
     View,
     extent,
+    geom: { Point, MultiLineString, Polygon },
     control: {
         Attribution,
         Control,

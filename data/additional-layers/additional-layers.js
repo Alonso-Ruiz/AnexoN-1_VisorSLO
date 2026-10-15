@@ -90,18 +90,18 @@
     });
     var runwayLayer = addVectorLayer({
         data: "json_PistadeAterrizaje_7",
-        title: "Pista de aterrizaje",
+        title: "Pista del Aeródromo Las Palmas — RWY 02/20",
         group: "airfield",
         zIndex: 30,
-        interactive: false,
+        interactive: true,
         style: lineStyle("rgba(45,51,54,0.96)", 3)
     });
     var thresholdLayer = addVectorLayer({
         data: "json_UMBRAL20_8",
-        title: "Umbral 20",
+        title: "Cabecera de pista — Umbral 20",
         group: "airfield",
         zIndex: 31,
-        interactive: false,
+        interactive: true,
         style: new ol.style.Style({
             image: new ol.style.Circle({
                 radius: 6,
@@ -150,9 +150,109 @@
         interactive: false,
         style: lineStyle("rgba(183,72,75,0.9)", 2.1, [10, 5])
     });
+
+    function labelStyle(text, placement, color) {
+        return new ol.style.Text({
+            text: text,
+            font: "600 12px Arial, sans-serif",
+            placement: placement || "point",
+            repeat: placement === "line" ? 420 : undefined,
+            overflow: true,
+            offsetY: -14,
+            fill: new ol.style.Fill({ color: color || "#303b40" }),
+            stroke: new ol.style.Stroke({ color: "rgba(255,255,255,0.95)", width: 3 })
+        });
+    }
+
+    // Use the runway outline for its clickable interior and southern end.
+    var runwayRing = runwayLayer.getSource().getFeatures()[0].getGeometry().getCoordinates()[0];
+    var runwayArea = new ol.Feature(new ol.geom.Polygon([runwayRing]));
+    runwayLayer.getSource().addFeature(runwayArea);
+    runwayLayer.setStyle(new ol.style.Style({
+        stroke: new ol.style.Stroke({ color: "rgba(45,51,54,0.96)", width: 3 }),
+        fill: new ol.style.Fill({ color: "rgba(45,51,54,0.04)" })
+    }));
+    runwayLayer.set("popupPriority", 97);
+    thresholdLayer.set("popupPriority", 99);
+    thresholdLayer.getStyle().setText(labelStyle("Umbral 20"));
+    var southEdge = runwayRing.slice(0, -1).sort(function (a, b) { return a[1] - b[1]; }).slice(0, 2);
+    var threshold02Layer = new ol.layer.Vector({
+        source: new ol.source.Vector({ features: [new ol.Feature(new ol.geom.Point([
+            (southEdge[0][0] + southEdge[1][0]) / 2,
+            (southEdge[0][1] + southEdge[1][1]) / 2
+        ]))] }),
+        style: new ol.style.Style({
+            image: new ol.style.Circle({ radius: 5,
+                fill: new ol.style.Fill({ color: "#303b40" }),
+                stroke: new ol.style.Stroke({ color: "#fff", width: 1.5 }) }),
+            text: labelStyle("Cabecera — Umbral 02")
+        }),
+        zIndex: 60,
+        properties: { title: "Cabecera de pista — Umbral 02", interactive: true, popupPriority: 99 }
+    });
+    additionalLayers.push({ layer: threshold02Layer, group: "airfield" });
+
+    function surfaceBoundary(sourceLayer, text) {
+        var features = [];
+        sourceLayer.getSource().getFeatures().forEach(function (feature) {
+            var geometry = feature.getGeometry();
+            if (!geometry) return;
+            var polygons = geometry.getType() === "MultiPolygon" ? geometry.getCoordinates() : [geometry.getCoordinates()];
+            polygons.forEach(function (rings) {
+                if (rings[0] && rings[0].length) features.push(new ol.Feature(new ol.geom.MultiLineString([rings[0]])));
+            });
+        });
+        var layer = new ol.layer.Vector({
+            source: new ol.source.Vector({ features: features }),
+            style: new ol.style.Style({
+                stroke: new ol.style.Stroke({ color: "rgba(183,72,75,0.85)", width: 1.5, lineDash: [10, 5] }),
+                text: labelStyle(text, "line", "#a83232")
+            }),
+            declutter: true,
+            zIndex: 61,
+            properties: { interactive: false }
+        });
+        additionalLayers.push({ layer: layer, group: "surfaces" });
+        return layer;
+    }
+    var conicalStart = surfaceBoundary(horizontalSurfaceLayer, "Inicio de superficie cónica");
+    var conicalEnd = surfaceBoundary(conicalSurfaceLayer, "Fin de superficie cónica");
+
+    function showDistrictName(map) {
+        var feature = districtsLayer.getSource().getFeatures().find(function (item) {
+            return String(item.get("DISTRITO")).toUpperCase() === "SAN BORJA";
+        });
+        if (!feature) return;
+        var geometry = feature.getGeometry();
+        var polygon = geometry.getType() === "MultiPolygon"
+            ? geometry.getPolygons().sort(function (a, b) { return b.getArea() - a.getArea(); })[0] : geometry;
+        var element = document.createElement("div");
+        element.className = "district-name-card";
+        var name = document.createElement("span");
+        name.textContent = "San Borja";
+        var close = document.createElement("button");
+        close.type = "button";
+        close.textContent = "×";
+        close.setAttribute("aria-label", "Ocultar nombre de San Borja");
+        element.appendChild(name);
+        element.appendChild(close);
+        var overlay = new ol.Overlay({ element: element, positioning: "center-center", stopEvent: true });
+        overlay.setPosition(polygon.getInteriorPoint().getCoordinates().slice(0, 2));
+        map.addOverlay(overlay);
+        function resize() {
+            var zoom = map.getView().getZoom() || 14;
+            element.style.fontSize = Math.max(11, Math.min(17, 17 - (zoom - 13) * 1.2)) + "px";
+        }
+        resize();
+        map.getView().on("change:resolution", resize);
+        close.addEventListener("click", function () {
+            map.getView().un("change:resolution", resize);
+            map.removeOverlay(overlay);
+        });
+    }
     layerGroups = {
-        surfaces: [conicalSurfaceLayer, horizontalSurfaceLayer, approach20Layer, approach02Layer],
-        airfield: [airbaseLayer, runwayLayer, thresholdLayer],
+        surfaces: [conicalSurfaceLayer, horizontalSurfaceLayer, approach20Layer, approach02Layer, conicalStart, conicalEnd],
+        airfield: [airbaseLayer, runwayLayer, thresholdLayer, threshold02Layer],
         mesh: [
             verticalLayer,
             horizontalLayer,
@@ -180,6 +280,7 @@
     }
 
     function configure(map) {
+        showDistrictName(map);
         additionalLayers.forEach(function (entry) {
             map.addLayer(entry.layer);
             entry.layer.setVisible(false);

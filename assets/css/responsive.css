@@ -294,6 +294,10 @@
         display: none;
     }
 
+    .legend-content .san-borja-grid-toggle {
+        display: flex;
+    }
+
     .legend-content .legend-item {
         margin-bottom: 12px;
         font-size: 13px;
@@ -467,11 +471,10 @@
 
     .institutional-brand {
         display: flex;
-        width: 168px;
+        width: 96px;
         height: 100%;
-        padding-right: 12px;
+        padding-right: 10px;
         align-items: center;
-        gap: 7px;
         box-sizing: border-box;
         border-right: 1px solid rgba(255, 255, 255, 0.38);
         color: #ffffff;
@@ -479,14 +482,9 @@
     }
 
     .institutional-brand img {
-        width: 36px;
-        height: 44px;
+        width: 82px;
+        height: 54px;
         object-fit: contain;
-    }
-
-    .institutional-brand strong {
-        font-size: 14px;
-        line-height: 1.12;
     }
 
     .institutional-copy {
@@ -739,6 +737,10 @@
         display: none;
     }
 
+    .legend-content .san-borja-grid-toggle {
+        display: flex;
+    }
+
     .legend-content .legend-item {
         margin-bottom: 7px;
         font-size: 11px;
@@ -865,12 +867,8 @@
     }
 
     .institutional-brand {
-        width: 155px;
+        width: 92px;
         padding-right: 10px;
-    }
-
-    .institutional-brand strong {
-        font-size: 11px;
     }
 
     .institutional-copy h1 {

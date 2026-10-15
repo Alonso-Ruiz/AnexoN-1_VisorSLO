@@ -94,6 +94,7 @@
         if (layer === window.lyr_CuadranteSLO100mx100m_2) {
             return 100;
         }
+        if (layer.get("popupPriority")) return layer.get("popupPriority");
         return layer.get("title") === "Aeródromo Las Palmas" ? 95 : 90;
     }
     function initSloPopup(map, highlightOverlay) {

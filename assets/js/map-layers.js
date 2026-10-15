@@ -49,6 +49,18 @@
         }
     }
 
+    function bindSanBorjaGridToggle() {
+        var toggle = document.getElementById("san-borja-grid-toggle");
+        var gridLayer = window.lyr_CuadranteSLO100mx100m_2;
+
+        if (!toggle || !gridLayer) return;
+
+        toggle.checked = gridLayer.getVisible();
+        toggle.addEventListener("change", function (event) {
+            gridLayer.setVisible(event.target.checked);
+        });
+    }
+
     function applyDistrictBoundaryStyle() {
         if (!window.lyr_Lmitedistrital_SanBorja_4) {
             return;
@@ -262,6 +274,7 @@
 
         applyDistrictBoundaryStyle();
         applySloGridStyle();
+        bindSanBorjaGridToggle();
         configureDeferredLots(map);
         if (window.VisorAdditionalLayers) {
             window.VisorAdditionalLayers.configure(map);
