@@ -894,6 +894,11 @@
         padding-right: 10px;
     }
 
+    .institutional-brand img {
+        width: 82px;
+        height: 54px;
+    }
+
     .institutional-copy h1 {
         font-size: 12px;
     }

@@ -90,7 +90,7 @@
     });
     var runwayLayer = addVectorLayer({
         data: "json_PistadeAterrizaje_7",
-        title: "Pista del Aeródromo Las Palmas — RWY 02/20",
+        title: "RWY 20 / RWY 02",
         group: "airfield",
         zIndex: 30,
         interactive: true,
@@ -98,7 +98,7 @@
     });
     var thresholdLayer = addVectorLayer({
         data: "json_UMBRAL20_8",
-        title: "Cabecera de pista — Umbral 20",
+        title: "RWY 20",
         group: "airfield",
         zIndex: 31,
         interactive: true,
@@ -174,7 +174,7 @@
     }));
     runwayLayer.set("popupPriority", 97);
     thresholdLayer.set("popupPriority", 99);
-    thresholdLayer.getStyle().setText(labelStyle("Umbral 20"));
+    thresholdLayer.getStyle().setText(labelStyle("RWY 20"));
     var southEdge = runwayRing.slice(0, -1).sort(function (a, b) { return a[1] - b[1]; }).slice(0, 2);
     var threshold02Layer = new ol.layer.Vector({
         source: new ol.source.Vector({ features: [new ol.Feature(new ol.geom.Point([
@@ -185,10 +185,10 @@
             image: new ol.style.Circle({ radius: 5,
                 fill: new ol.style.Fill({ color: "#303b40" }),
                 stroke: new ol.style.Stroke({ color: "#fff", width: 1.5 }) }),
-            text: labelStyle("Cabecera — Umbral 02")
+            text: labelStyle("RWY 02")
         }),
         zIndex: 60,
-        properties: { title: "Cabecera de pista — Umbral 02", interactive: true, popupPriority: 99 }
+        properties: { title: "RWY 02", interactive: true, popupPriority: 99 }
     });
     additionalLayers.push({ layer: threshold02Layer, group: "airfield" });
 
@@ -228,27 +228,17 @@
             ? geometry.getPolygons().sort(function (a, b) { return b.getArea() - a.getArea(); })[0] : geometry;
         var element = document.createElement("div");
         element.className = "district-name-card";
-        var name = document.createElement("span");
-        name.textContent = "San Borja";
-        var close = document.createElement("button");
-        close.type = "button";
-        close.textContent = "×";
-        close.setAttribute("aria-label", "Ocultar nombre de San Borja");
-        element.appendChild(name);
-        element.appendChild(close);
-        var overlay = new ol.Overlay({ element: element, positioning: "center-center", stopEvent: true });
+        element.textContent = "San Borja";
+        var overlay = new ol.Overlay({ element: element, positioning: "center-center", stopEvent: false });
         overlay.setPosition(polygon.getInteriorPoint().getCoordinates().slice(0, 2));
         map.addOverlay(overlay);
         function resize() {
             var zoom = map.getView().getZoom() || 14;
             element.style.fontSize = Math.max(11, Math.min(17, 17 - (zoom - 13) * 1.2)) + "px";
+            element.style.display = zoom >= 15 ? "none" : "block";
         }
         resize();
         map.getView().on("change:resolution", resize);
-        close.addEventListener("click", function () {
-            map.getView().un("change:resolution", resize);
-            map.removeOverlay(overlay);
-        });
     }
     layerGroups = {
         surfaces: [conicalSurfaceLayer, horizontalSurfaceLayer, approach20Layer, approach02Layer, conicalStart, conicalEnd],
